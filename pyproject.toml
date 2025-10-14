@@ -1,0 +1,12 @@
+[project]
+name = "scoring-apis"
+version = "0.1.0"
+description = "FastAPI scoring and data layers API"
+requires-python = ">=3.13"
+dependencies = [
+    "asyncpg>=0.30.0",
+    "fastapi>=0.65.2",
+    "pydantic>=1.8.2",
+    "uvicorn[standard]>=0.14.0",
+    "httpx>=0.28.1",
+]

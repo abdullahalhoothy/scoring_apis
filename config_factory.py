@@ -1,0 +1,21 @@
+import json
+from dataclasses import dataclass
+from pathlib import Path
+
+@dataclass
+class ApiConfig:
+    secrets_dir: str = "secrets"
+    database_url: str = ""
+
+    @classmethod
+    def load(cls, secrets_dir: str = "secrets"):
+        config = cls(secrets_dir=secrets_dir)
+        
+        config_file = Path(secrets_dir) / "postgres_db.json"
+        if config_file.exists():
+            data = json.loads(config_file.read_text(encoding="utf-8"))
+            config.database_url = data.get("DATABASE_URL", "")
+
+        return config
+
+CONF = ApiConfig.load()
