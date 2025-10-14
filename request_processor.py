@@ -21,9 +21,7 @@ async def request_handling(
     req: Optional[T],
     input_type: Optional[Type[T]],
     output_type: Optional[Type[U]],
-    custom_function: Optional[Callable[..., Awaitable[Any]]],
-    output: Optional[T] = "",
-    wrap_output: bool = False
+    custom_function: Optional[Callable[..., Awaitable[Any]]]
 ):
     if req and input_type:
         try:
@@ -39,27 +37,21 @@ async def request_handling(
                 }
             )
 
-    if custom_function is not None:
-        try:
-            if req:
-                output = await custom_function(req=req)
-            else:
-                output = await custom_function()
-        except HTTPException:
-            # If it's already an HTTPException, just re-raise it
-            raise
-        except Exception as e:
-            # For any other type of exception, wrap it in an HTTPException
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"An unexpected error occurred: {str(e)}",
-            ) from e
-    if wrap_output:
-        output = {
-            'data': output,
-            'message': 'Request received.',
-            'request_id': "req-" + str(uuid.uuid4())
-        }
+    try:
+        if req:
+            output = await custom_function(req=req)
+        else:
+            output = await custom_function()
+    except HTTPException:
+        # If it's already an HTTPException, just re-raise it
+        raise
+    except Exception as e:
+        # For any other type of exception, wrap it in an HTTPException
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"An unexpected error occurred: {str(e)}",
+        ) from e
+
     res_body = output_type(**output) if output_type else output
 
     return res_body
