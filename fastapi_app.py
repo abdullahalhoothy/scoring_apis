@@ -1,6 +1,4 @@
 import os
-import sys
-import glob
 import time
 import asyncio
 from fastapi.staticfiles import StaticFiles
@@ -11,8 +9,9 @@ from database import Database
 from app_logger import get_logger
 
 # Import routers
-
-from routers.data_layers import data_layers_router
+from routers.demographics.endpoints import demographics_router
+from routers.competition.endpoints import competition_router
+from routers.complimentary.endpoints import complementary_router
 
 
 logger = get_logger(__name__)
@@ -23,7 +22,9 @@ app = FastAPI()
 logger.info("FastAPI app instance created")
 
 # Include routers
-app.include_router(data_layers_router, tags=["Data & Layers"])
+app.include_router(demographics_router, prefix="/api/v1", tags=["Demographics"])
+app.include_router(competition_router, prefix="/api/v1", tags=["Competition"])
+app.include_router(complementary_router, prefix="/api/v1", tags=["Complementary"])
 
 
 app.mount("/static", StaticFiles(directory="static"), name="static")

@@ -6,6 +6,14 @@ from pathlib import Path
 class ApiConfig:
     secrets_dir: str = "secrets"
     database_url: str = ""
+    
+    # API endpoints
+    fetch_dataset: str = "/demographics/score"
+    competition_score: str = "/competition/score"
+    complementary_score: str = "/complementary/score"
+    
+    # External API configuration
+    external_api_base_url: str = "http://37.27.195.216:8000"
 
     @classmethod
     def load(cls, secrets_dir: str = "secrets"):
