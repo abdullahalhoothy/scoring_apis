@@ -11,6 +11,7 @@ class ApiConfig:
     fetch_dataset: str = "/demographics/score"
     competition_score: str = "/competition/score"
     complementary_score: str = "/complementary/score"
+    income_score: str = "/income/score"
     
     # External API configuration
     external_api_base_url: str = "http://37.27.195.216:8000"

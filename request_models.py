@@ -27,3 +27,11 @@ class ReqComplementary(BaseModel):
     radius: int = Field(..., description="Search radius in meters")
     complementary_business_categories: List[str] = Field(..., description="List of complementary business categories")
     target_num_per_category: int = Field(..., description="Target number per category")
+
+
+class ReqIncome(BaseModel):
+    """Request model for income scoring API"""
+    lat: float = Field(..., description="Latitude coordinate")
+    lng: float = Field(..., description="Longitude coordinate")
+    radius: int = Field(..., description="Search radius in meters")
+    target_income_level: Literal["low", "medium", "high"] = Field(..., description="Target income level (low, medium, high)")

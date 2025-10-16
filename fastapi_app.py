@@ -12,6 +12,7 @@ from app_logger import get_logger
 from routers.demographics.endpoints import demographics_router
 from routers.competition.endpoints import competition_router
 from routers.complimentary.endpoints import complementary_router
+from routers.Income.endpoints import income_router
 
 
 logger = get_logger(__name__)
@@ -25,6 +26,7 @@ logger.info("FastAPI app instance created")
 app.include_router(demographics_router, prefix="/api/v1", tags=["Demographics"])
 app.include_router(competition_router, prefix="/api/v1", tags=["Competition"])
 app.include_router(complementary_router, prefix="/api/v1", tags=["Complementary"])
+app.include_router(income_router, prefix="/api/v1", tags=["Income"])
 
 
 app.mount("/static", StaticFiles(directory="static"), name="static")

@@ -35,3 +35,12 @@ class ResComplementary(BaseModel):
     coverage_factor: float = Field(..., description="Category coverage factor (0-1)")
     balance_factor: float = Field(..., description="Category balance factor (0-1)")
     explanation: str = Field(..., description="Human-readable explanation of the score")
+
+
+class ResIncome(BaseModel):
+    """Response model for income scoring API"""
+    score: float = Field(..., description="Calculated income score (0-100 based on percentile)")
+    target_income_level: str = Field(..., description="Target income level used for calculation")
+    areas_analyzed: int = Field(..., description="Number of areas analyzed within radius")
+    avg_income: float = Field(..., description="Average income in the analyzed area")
+    income_distribution: Dict[str, float] = Field(..., description="Income distribution breakdown (low/medium/high scores)")
