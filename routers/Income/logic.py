@@ -2,7 +2,12 @@ from typing import Dict, Any
 from database import Database
 from request_models import ReqIncome
 from sql_object import SqlObject
+from logging_wrapper import apply_decorator_to_module
 
+from app_logger import get_logger
+
+logger = get_logger(__name__)
+logger.info("Database module loaded successfully")
 
 async def calculate_income_score(req: ReqIncome) -> Dict[str, Any]:
     """Calculate income score based on location and target income level"""
@@ -55,3 +60,6 @@ def calculate_score_from_income_results(results: list, target_income_level: str)
         "avg_income": round(avg_income, 2),
         "income_distribution": income_distribution
     }
+
+# Apply the decorator to all functions in this module
+apply_decorator_to_module(logger)(__name__)

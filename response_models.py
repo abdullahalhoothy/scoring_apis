@@ -44,3 +44,13 @@ class ResIncome(BaseModel):
     areas_analyzed: int = Field(..., description="Number of areas analyzed within radius")
     avg_income: float = Field(..., description="Average income in the analyzed area")
     income_distribution: Dict[str, float] = Field(..., description="Income distribution breakdown (low/medium/high scores)")
+
+
+class ResTraffic(BaseModel):
+    """Response model for traffic scoring API"""
+    score: float = Field(..., description="Overall traffic score")
+    storefront_score: float = Field(..., description="Traffic score specific to storefront direction")
+    area_score: float = Field(..., description="General area traffic score")
+    screenshot_filename: str = Field(..., description="Filename of the traffic analysis screenshot")
+    analysis_date: str = Field(..., description="Date and time when analysis was performed")
+    explanation: str = Field(..., description="Human-readable explanation of the score")

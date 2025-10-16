@@ -35,3 +35,12 @@ class ReqIncome(BaseModel):
     lng: float = Field(..., description="Longitude coordinate")
     radius: int = Field(..., description="Search radius in meters")
     target_income_level: Literal["low", "medium", "high"] = Field(..., description="Target income level (low, medium, high)")
+
+
+class ReqTraffic(BaseModel):
+    """Request model for traffic scoring API"""
+    lat: float = Field(..., description="Latitude coordinate")
+    lng: float = Field(..., description="Longitude coordinate")
+    storefront_direction: Literal["north", "south", "east", "west"] = Field("north", description="Direction the storefront faces")
+    day: Literal["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] = Field("Monday", description="Day of the week for analysis")
+    time: str = Field("6PM", description="Time of day for analysis (e.g., '6PM', '2PM')")
