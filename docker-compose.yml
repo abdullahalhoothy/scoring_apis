@@ -3,9 +3,8 @@ services:
   scoring_api:
     build:
       context: .
-    volumes:
-      - ./secrets:/app/secrets
+    env_file:
+      - secrets/database_dev.env
     ports:
       - "8000:8000"
-      - "7000:7000"
 

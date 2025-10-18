@@ -56,7 +56,7 @@ jobs:
           echo "Secret directories created."
           
           # Create secret files
-          echo '${{ secrets.DEV_SCORING_API_POSTGRES_DB }}' > secrets/postgres_db.json
+          echo '${{ secrets.DEV_SCORING_API_POSTGRES_DB }}' > secrets/database_dev.env
           echo "Secret files created."
           
           # Replace values in files
