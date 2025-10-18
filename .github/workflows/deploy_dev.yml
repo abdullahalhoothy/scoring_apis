@@ -63,7 +63,7 @@ jobs:
           sed -i 's|host="localhost"|host="0.0.0.0"|g' run_apps.py
           echo "Configuration files updated."
           
-          docker compose up
+          docker compose up -d
           echo "Docker compose up completed."
 
           echo "Deployment process finished."
