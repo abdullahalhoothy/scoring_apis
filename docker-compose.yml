@@ -1,10 +1,8 @@
 services:
 
-  middle_api:
+  scoring_api:
     build:
-      context: ./my_middle_API
-    env_file:
-      - secrets/secrets_database.env # change this
+      context: .
     ports:
       - "8000:8000"
       - "7000:7000"

@@ -1,0 +1,80 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches: [ dev ]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual trigger'
+        required: false
+        default: 'Manual build and deploy'
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.13']
+    steps:
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      env:
+        DEV_SCORING_API_POSTGRES_DB: ${{ secrets.DEV_SCORING_API_POSTGRES_DB }}
+        GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        host: '37.27.195.216'
+        username: ${{ secrets.VPS_USERNAME }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        envs: DEV_SCORING_API_POSTGRES_DB, GITHUB_PAT
+        script: |
+          set -x  # Enable debug mode
+          set -e  # Exit on error
+          
+          echo "Starting deployment process..."
+
+          cd ..
+          cd ..
+          cd ..
+          cd ..
+          cd ..
+          if [ -d "scoring_apis" ]; then
+            cd scoring_apis
+            docker compose down
+            echo "Docker compose down completed."
+            
+            cd ..
+            rm -rf scoring_apis
+            echo "Removed existing scoring_apis directory."
+          fi
+          
+          # Clone the repository and checkout subrepositories directly
+          git config --global user.email "ci@example.com"
+          git config --global user.name "Github actions"
+          
+          # Clone main repository
+          git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/abdullahalhoothy/scoring_apis.git
+          cd scoring_apis
+          git checkout dev
+          
+          # Create secrets directory if it doesn't exist
+          mkdir -p secrets
+          echo "Secret directories created."
+          
+          # Create secret files
+          echo '${{ secrets.DEV_SCORING_API_POSTGRES_DB }}' > secrets/postgres_db.json
+          echo "Secret files created."
+          
+          # Replace values in files
+          sed -i 's|host="localhost"|host="0.0.0.0"|g' run_apps.py
+          echo "Configuration files updated."
+          
+          # Build and run Docker containers
+          docker compose build
+          echo "Docker compose build completed."
+          
+          docker compose up -d
+          echo "Docker compose up completed."
+
+          echo "Deployment process finished."
