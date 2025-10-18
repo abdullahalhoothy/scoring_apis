@@ -30,6 +30,11 @@ app.include_router(complementary_router, prefix="/api/v1", tags=["Complementary"
 app.include_router(income_router, prefix="/api/v1", tags=["Income"])
 app.include_router(traffic_router, prefix="/api/v1", tags=["Traffic"])
 
+# Ensure static directory exists
+static_dir = "static"
+if not os.path.exists(static_dir):
+    os.makedirs(static_dir)
+    logger.info(f"Created static directory: {static_dir}")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

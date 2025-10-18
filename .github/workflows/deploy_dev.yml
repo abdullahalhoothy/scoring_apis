@@ -67,7 +67,7 @@ jobs:
           docker compose build
           echo "Docker compose build completed."
           
-          docker compose up -d
+          docker compose up
           echo "Docker compose up completed."
 
           echo "Deployment process finished."
