@@ -1,8 +1,6 @@
 name: Deploy Dev
 
 on:
-  push:
-    branches: [ dev ]
   workflow_dispatch:
     inputs:
       reason:
@@ -56,7 +54,6 @@ jobs:
           # Clone main repository
           git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/abdullahalhoothy/scoring_apis.git
           cd scoring_apis
-          git checkout dev
           
           # Create secrets directory if it doesn't exist
           mkdir -p secrets
