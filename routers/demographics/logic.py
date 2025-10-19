@@ -91,7 +91,7 @@ def calculate_score_from_results(
         age_proximity_factor * 0.5  # 50% weight for age proximity
         + density_factor * 0.3  # 30% weight for population density
         + population_factor * 0.2  # 20% weight for population size
-    )
+    ) * 100
 
     # Generate explanation
     age_quality = (

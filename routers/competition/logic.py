@@ -130,7 +130,7 @@ def calculate_score_from_competition_data(
     category_factor = max(0, 1 - (avg_per_category / target_num_per_category))
 
     # Combine factors (lower competition = higher score)
-    final_score = competition_factor * 0.7 + category_factor * 0.3
+    final_score = (competition_factor * 0.7 + category_factor * 0.3) * 100
 
     # Generate explanation
     competition_level = (
