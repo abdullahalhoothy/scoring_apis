@@ -28,11 +28,11 @@ def calculate_score_from_income_results(results: list, target_income_level: str)
     
     # Extract the appropriate score column based on target income level
     if target_income_level == "low":
-        target_scores = [row["income_score_low"] for row in results if row["income_score_low"] is not None]
+        target_scores = [row["low_income_score"] for row in results if row["low_income_score"] is not None]
     elif target_income_level == "medium":
-        target_scores = [row["income_score_medium"] for row in results if row["income_score_medium"] is not None]
+        target_scores = [row["medium_income_score"] for row in results if row["medium_income_score"] is not None]
     else:  # high
-        target_scores = [row["income_score_high"] for row in results if row["income_score_high"] is not None]
+        target_scores = [row["high_income_score"] for row in results if row["high_income_score"] is not None]
     
     # Get the average score from the pre-calculated column
     final_score = sum(target_scores) / len(target_scores) if target_scores else 0
@@ -42,9 +42,9 @@ def calculate_score_from_income_results(results: list, target_income_level: str)
     avg_income = sum(incomes) / len(incomes) if incomes else 0
     
     # Calculate all distribution scores for context
-    low_scores = [row["income_score_low"] for row in results if row["income_score_low"] is not None]
-    medium_scores = [row["income_score_medium"] for row in results if row["income_score_medium"] is not None]
-    high_scores = [row["income_score_high"] for row in results if row["income_score_high"] is not None]
+    low_scores = [row["low_income_score"] for row in results if row["low_income_score"] is not None]
+    medium_scores = [row["medium_income_score"] for row in results if row["medium_income_score"] is not None]
+    high_scores = [row["high_income_score"] for row in results if row["high_income_score"] is not None]
     
     income_distribution = {
         "low_score": round(sum(low_scores) / len(low_scores), 2) if low_scores else 0.0,
