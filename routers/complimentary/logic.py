@@ -144,7 +144,7 @@ def calculate_score_from_complementary_data(
         density_factor * 0.4  # 40% weight for overall density
         + coverage_factor * 0.3  # 30% weight for category coverage
         + balance_factor * 0.3  # 30% weight for category balance
-    )
+    ) * 100
 
     # Generate explanation
     density_quality = (
