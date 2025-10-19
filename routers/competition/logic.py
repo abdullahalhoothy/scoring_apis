@@ -7,7 +7,7 @@ from logging_wrapper import apply_decorator_to_module
 from app_logger import get_logger
 
 logger = get_logger(__name__)
-logger.info("Database module loaded successfully")
+logger.info("Executing Competition Score logic")
 
 
 async def login_to_external_api() -> str:
@@ -85,7 +85,7 @@ async def fetch_competition_data_from_external_api(
             data = await response.json()
 
             # Extract business data from response
-            businesses = data.get("data", {}).get("results", [])
+            businesses = data.get("data", {}).get("features", [])
             return businesses
 
 
