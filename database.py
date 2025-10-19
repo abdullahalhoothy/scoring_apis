@@ -8,7 +8,7 @@ from typing import Optional, List
 from contextlib import asynccontextmanager
 import time
 from logging_wrapper import apply_decorator_to_module
-from config_factory import CONF
+
 from app_logger import get_logger
 
 logger = get_logger(__name__)
@@ -20,7 +20,8 @@ class Database:
     pool: Optional[Pool] = None
     last_refresh_time: float = 0
     refresh_interval: int = 3600  # Refresh every hour
-    dsn: str = CONF.database_url
+    dsn: str = os.getenv("DATABASE_URL")
+
     @classmethod
     async def create_pool(cls):
         """
