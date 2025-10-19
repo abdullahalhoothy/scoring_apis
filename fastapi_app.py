@@ -24,11 +24,11 @@ app = FastAPI()
 logger.info("FastAPI app instance created")
 
 # Include routers
-app.include_router(demographics_router, prefix="/api/v1", tags=["Demographics"])
-app.include_router(competition_router, prefix="/api/v1", tags=["Competition"])
-app.include_router(complementary_router, prefix="/api/v1", tags=["Complementary"])
-app.include_router(income_router, prefix="/api/v1", tags=["Income"])
-app.include_router(traffic_router, prefix="/api/v1", tags=["Traffic"])
+app.include_router(demographics_router)
+app.include_router(competition_router)
+app.include_router(complementary_router)
+app.include_router(income_router)
+app.include_router(traffic_router)
 
 # Ensure static directory exists
 static_dir = "static"
