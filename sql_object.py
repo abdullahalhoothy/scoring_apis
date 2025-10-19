@@ -44,9 +44,9 @@ class SqlObject:
         SELECT 
             income,
             geometry,
-            income_score_low,
-            income_score_medium,
-            income_score_high,
+            low_income_score,
+            medium_income_score,
+            high_income_score,
             ST_Distance(geometry::geography, ST_MakePoint($2, $1)::geography) as distance
         FROM schema_marketplace.area_income_all_features_v12
         WHERE ST_DWithin(
