@@ -70,6 +70,7 @@ async def fetch_competition_data_from_external_api(
             "boolean_query": " OR ".join(categories),
             "action": "sample",
             "search_type": "category_search",
+            "radius":radius
         },
     }
 
