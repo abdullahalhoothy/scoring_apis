@@ -7,7 +7,7 @@ from fastapi import APIRouter
 from request_processor import request_handling
 from request_models import ReqComplementary
 from response_models import ResComplementary
-from routers.complimentary.logic import calculate_complementary_score
+from routers.complimentary.logic import calculate_complementary_score_endpoint
 
 from config_factory import CONF
 
@@ -30,6 +30,6 @@ async def complementary_score_ep(req: ReqComplementary):
         req,
         ReqComplementary,
         ResComplementary,
-        calculate_complementary_score,
+        calculate_complementary_score_endpoint,
     )
     return response

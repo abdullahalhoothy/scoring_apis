@@ -7,7 +7,7 @@ from fastapi import APIRouter
 from request_processor import request_handling
 from request_models import ReqIncome
 from response_models import ResIncome
-from routers.Income.logic import calculate_income_score
+from routers.Income.logic import calculate_income_score_endpoint
 
 from config_factory import CONF
 
@@ -30,6 +30,6 @@ async def income_score_ep(req: ReqIncome):
         req,
         ReqIncome,
         ResIncome,
-        calculate_income_score,
+        calculate_income_score_endpoint,
     )
     return response

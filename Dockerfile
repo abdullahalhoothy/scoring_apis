@@ -15,13 +15,21 @@ RUN apt-get update && \
 # Install uv
 RUN pip install uv
 
+# Copy the scoring_algorithms package first
+COPY scoring_algorithms /app/scoring_algorithms
+
 # Copy uv configuration files
 COPY pyproject.toml uv.lock ./
 
 # Install dependencies with uv
 RUN uv sync --frozen
 
+# Install the scoring_algorithms package in the uv virtual environment
+RUN uv pip install -e ./scoring_algorithms
+
+# Copy the rest of the application
 COPY . /app
+
 EXPOSE 8000
 
 # Use uv run to execute uvicorn within the virtual environment

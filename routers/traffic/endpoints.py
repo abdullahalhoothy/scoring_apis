@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from request_models import ReqTraffic
 from response_models import ResTraffic
-from routers.traffic.logic import calculate_traffic_score
+from routers.traffic.logic import calculate_traffic_score_endpoint
 from config_factory import CONF
 
 router = APIRouter()
@@ -13,7 +13,7 @@ async def traffic_score(req: ReqTraffic) -> ResTraffic:
     
     try:
         # Calculate traffic score
-        score_data = await calculate_traffic_score(req)
+        score_data = await calculate_traffic_score_endpoint(req)
         
         # Return structured response
         return ResTraffic(**score_data)

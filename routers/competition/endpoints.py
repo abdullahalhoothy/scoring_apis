@@ -7,7 +7,7 @@ from fastapi import APIRouter
 from request_processor import request_handling
 from request_models import ReqCompetition
 from response_models import ResCompetition
-from routers.competition.logic import calculate_competition_score
+from routers.competition.logic import calculate_competition_score_endpoint
 
 from config_factory import CONF
 
@@ -30,6 +30,6 @@ async def competition_score_ep(req: ReqCompetition):
         req,
         ReqCompetition,
         ResCompetition,
-        calculate_competition_score,
+        calculate_competition_score_endpoint,
     )
     return response

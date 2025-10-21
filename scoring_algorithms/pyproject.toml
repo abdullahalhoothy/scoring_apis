@@ -1,0 +1,29 @@
+[project]
+name = "scoring-algorithms"
+version = "1.0.0"
+description = "Shared scoring algorithms for location-based business analysis"
+requires-python = ">=3.10"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+
+dependencies = [
+    "aiohttp>=3.8.0",
+    "asyncpg>=0.29.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+]
+
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["scoring_algorithms*"]

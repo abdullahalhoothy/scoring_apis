@@ -25,3 +25,11 @@ all_types/__pycache__/**
 # ignore log files of integration tests
 tests/integration/test_logs/*
 app.log
+
+# Package build artifacts
+*.egg-info/
+dist/
+build/
+*.pyc
+*.pyo
+*.whl

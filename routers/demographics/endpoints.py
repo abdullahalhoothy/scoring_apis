@@ -7,7 +7,7 @@ from fastapi import APIRouter
 from request_processor import request_handling
 from request_models import ReqDemographics
 from response_models import ResDemographics
-from routers.demographics.logic import calculate_demographics_score
+from routers.demographics.logic import calculate_demographics_score_endpoint
 
 from config_factory import CONF
 
@@ -30,6 +30,6 @@ async def fetch_dataset_ep(req: ReqDemographics):
         req,
         ReqDemographics,
         ResDemographics,
-        calculate_demographics_score,
+        calculate_demographics_score_endpoint,
     )
     return response
